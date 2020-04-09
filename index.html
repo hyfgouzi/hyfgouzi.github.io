@@ -242,6 +242,376 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfgouzi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/%E7%8B%97.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="gouzi避难所">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/09/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" itemprop="url">嵌入式学习笔记2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-09T17:08:34+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">嵌入式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="ARM体系结构指令集"><a href="#ARM体系结构指令集" class="headerlink" title="ARM体系结构指令集"></a>ARM体系结构指令集</h1><p>CPU指令集是软、硬件之间的一个重要分界线，指令集向上要很好地支持编译器，向下要方便硬件的设计实现。<br>ARM处理器有三个指令集:32位的ARM指令集，16位的Thumb指令集和8位的Jazelle<br>其中:</p>
+<ol>
+<li>ARM指令集是主要指令集，程序启东市总是从32位ARM指令集开始，并且所有的异常中断都自动切换为ARM指令状态。</li>
+<li>Thumb指令是压缩的指令，读取指令之后先动态解压缩，然后作为标准的ARM指令执行。</li>
+<li>Jazelle是Java字节码指令集，它能加快Java代码的执行速度</li>
+</ol>
+<hr>
+<h1 id="ARM处理器的寻址方式"><a href="#ARM处理器的寻址方式" class="headerlink" title="ARM处理器的寻址方式"></a>ARM处理器的寻址方式</h1><p>寄存器寻址、立即数寻址、寄存器移位寻址、寄存器间接寻址、基址寻址、多寄存器寻址、栈寻址、块拷贝寻址和相对寻址。</p>
+<h2 id="寄存器寻址"><a href="#寄存器寻址" class="headerlink" title="寄存器寻址"></a>寄存器寻址</h2><p>指令中地址码给出的是寄存器编号，在该寄存器中存放的是操作数，可以直接用于运算。由于寄存器寻址执行效率高，因此ARM指令普遍采用此种寻址方式。<br>例如：<br><code>ADD R0,R3,R4</code><br>R0&lt;-R3+R4</p>
+<h2 id="立即数寻址"><a href="#立即数寻址" class="headerlink" title="立即数寻址"></a>立即数寻址</h2><p>指令的地址码字段存放的不是操作数地址，而是操作数本身。立即数寻址的特点是速度快。但缺点是取值受到限制。通常使用的立即数是12位或者8位的。<br>例如：<br><code>AND R3,R7,#&amp;FF</code><br>在该指令中，第3个操作数是一个立即数，以”#”为前缀。如果在”#”后加”&amp;”表示十六进制数。这条AND操作指令的功能是先将R7中的32位数与0xFF进行与运算，将结果送到R3寄存器。</p>
+<h2 id="寄存器移位寻址"><a href="#寄存器移位寻址" class="headerlink" title="寄存器移位寻址"></a>寄存器移位寻址</h2><p>这种寻址方式是ARM指令集特有的。在参与第一个操作数运算之前，第2个寄存器操作数可以有选择地进行移位操作。<br>例如:<br><code>ADD R3,R2,R1,LSL #3</code><br>R3&lt;-R2+R1*8<br>这条指令表示寄存器R1的内容逻辑左移3位，再与寄存器R2内容相加，结果放入R3中。（逻辑右移LSR）</p>
+<h2 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h2><p>指令的地址码字段给出某一通用寄存器编号。在该寄存器中存放操作数的有效地址，而操作数则存放在存储单元（内存）中，即寄存器为操作数的地址指针。<br>例如：<br><code>LDR R0,[R1]</code><br>R0&lt;-[R1]<br><code>STR R0,[R1]</code><br>R0-&gt;[R1]</p>
+<h2 id="多寄存器寻址"><a href="#多寄存器寻址" class="headerlink" title="多寄存器寻址"></a>多寄存器寻址</h2><p>一次可以传送几个寄存器的值。一条指令可以传送16个寄存器的任何子集（或所有16个寄存器）。<br>例如：<br><code>LDMIA R3!,{R0,R2,R6}</code><br>R0&lt;-[R3],R2&lt;-[R3+4],R6&lt;-[R3+8]<br>由于传送的数据项总是32位的字，基址寄存器R3应当字对准，这条指令将R3指向的连续存储单元的内容装载到寄存器R0、R2和R6。</p>
+<h2 id="块拷贝寻址"><a href="#块拷贝寻址" class="headerlink" title="块拷贝寻址"></a>块拷贝寻址</h2><p>指把一块数据从寄存器的某一位置拷贝到另一位置的寻址方式。由于块拷贝操作借助多寄存器传送指令LDM/STM完成，因此从本质上讲，块拷贝寻址就是多寄存器寻址。栈寻址也属于多寄存器寻址。<br>例如，下面两条指令是把寄存器R2~R9中的8个字从R0指向的位置拷贝到R1指向的位置。<br><code>LDMIA R0!,{R2-R9}</code><br><code>STMIA R1!,{R2-R9}</code></p>
+<h2 id="相对寻址"><a href="#相对寻址" class="headerlink" title="相对寻址"></a>相对寻址</h2><p>以程序计数器PC为基础寄存器，主要用于跳转：<br>例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   BL SUBR</span><br><span class="line">   ...</span><br><span class="line">SUBR</span><br><span class="line">   MOV R1,R2</span><br><span class="line">   MOV PC,R14</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="ARM和C混合编程"><a href="#ARM和C混合编程" class="headerlink" title="ARM和C混合编程"></a>ARM和C混合编程</h1><h2 id="典型的ARM汇编"><a href="#典型的ARM汇编" class="headerlink" title="典型的ARM汇编"></a>典型的ARM汇编</h2><ul>
+<li>符号：<pre><code>用于代表某个常量或者标号等
+类似于高级语言的标识符</code></pre></li>
+<li>常量：<pre><code>数字：#25，#0x2c
+字符，字符串：&apos;a&apos;,&quot;abcd&quot;
+布尔常量：{true}，{false}</code></pre></li>
+<li>标号<pre><code>地址标号
+段内标号
+段外标号
+局部标号</code></pre></li>
+</ul>
+<hr>
+<h3 id="ARM汇编语言程序规范"><a href="#ARM汇编语言程序规范" class="headerlink" title="ARM汇编语言程序规范"></a>ARM汇编语言程序规范</h3><ul>
+<li>可以在汇编程序中加上空白行，来增加程序的可读性。</li>
+<li>指令，指示符，伪指令前必须加空格或者Tab制表符。</li>
+<li>所有标号必须在一行的最左边的位置开始书写，标号的后面不要加”:”.</li>
+<li>指令、指示符、寄存器名可以用小写字母也可以用大写字母来表示，但不能大小写字母混用。</li>
+<li>当一行写不下时，可以用反斜线”&quot;作为这一行最后的符号，然后另起一行接下去写。</li>
+<li>分号”;”除非在字符串常量中出现，否则它的出现就表示着注释的开始，此注释直至行尾结束。</li>
+</ul>
+<hr>
+<h3 id="ARM汇编语言指示符"><a href="#ARM汇编语言指示符" class="headerlink" title="ARM汇编语言指示符"></a>ARM汇编语言指示符</h3><p>ARM汇编语言指示符相当于x86处理器语言程序中的伪指令，它与ARM机器指令不存在一一对应的关系，它指示汇编器在汇编目标代码时进行变量定义、存储单元分配等操作。<br><strong>常用伪指令</strong><br>AREA—用于定义一个代码段<br>ENTRY—指定汇编程序的入口点<br>EXPORT—定义一个全局（外部）标号，在本文件中定义，可能在其他文件中引用<br>EQU—类似于C语言的define<br>CODE16&amp;CODE32<br>END<br><strong>ARM汇编语言程序举例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">	AREA    FUNCSUM,CODE,READONLY		</span><br><span class="line">    EXPORT  Reset_Handler    ;连接器指定要求的程序入口</span><br><span class="line">Reset_Handler	    ;定义程序入口	</span><br><span class="line">    MOV R0,#1       ;原程序非独立执行</span><br><span class="line">	MOV R1,#100     ;为可执行，为r0r1赋值</span><br><span class="line">    MOV R4,#0</span><br><span class="line">LOOP		</span><br><span class="line">    ADD     R4, R4, R0          ;R4为累加器		</span><br><span class="line">    ADD     R0, R0,#1           ;R0增量操作		</span><br><span class="line">	CMP     R0, R1		</span><br><span class="line">	BLE     LOOP                ;循环执行  		</span><br><span class="line">	MOV    R0, R4		</span><br><span class="line">	END</span><br></pre></td></tr></table></figure>
+<p>以上程序实现了1到100的求和，返回值存到R0中。<br><strong>注意</strong><br>条件指令：<br>            BEQ    相等<br>            BNE    不等<br>            BPL    非负<br>            BMI    负<br>            BCC    无进位<br>            BCS    有进位<br>            BLO    小于（无符号数）<br>            BHS    大于等于（无符号数）<br>            BHI    大于（无符号数）<br>            BLS    小于等于（无符号数）<br>            BVC    无溢出（有符号数）<br>            BVS    有溢出（有符号数）<br>            BGT    大于（有符号数）<br>            BGE    大于等于（有符号数）<br>            BLT    小于（有符号数）<br>            BLE    小于等于（有符号数）</p>
+<h2 id="ARM汇编、C和C-混合编程"><a href="#ARM汇编、C和C-混合编程" class="headerlink" title="ARM汇编、C和C++混合编程"></a>ARM汇编、C和C++混合编程</h2><p>在C/C++程序中，如果必须使用汇编指令来完成某些操作，可以采用两种方法:</p>
+<ul>
+<li>采用内嵌汇编，即在C／C++源程序中嵌人一块汇编代码，让这块汇编代码来完成特定操作。</li>
+<li>将必须使用汇编代码的部分独立编写，放在一个文件中，形成一个子程序。C／C++程序可以调用这些汇编程序来完成特定的操作。</li>
+</ul>
+<hr>
+<h3 id="C程序中内嵌汇编指令示例："><a href="#C程序中内嵌汇编指令示例：" class="headerlink" title="C程序中内嵌汇编指令示例："></a>C程序中内嵌汇编指令示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">void ex_strcpy(char *src,const char *dst)</span><br><span class="line">&#123;</span><br><span class="line">   int ch;</span><br><span class="line">   __asm</span><br><span class="line">   &#123;</span><br><span class="line">LOOP:</span><br><span class="line">   LDRB ch,[src],#1</span><br><span class="line">   STRB ch,[dst],#1</span><br><span class="line">   CMP ch,#0</span><br><span class="line">   BNE LOOP</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">const char *a&#x3D;&quot;this is a c program&quot;;</span><br><span class="line">char b[30];</span><br><span class="line">__asm</span><br><span class="line">&#123;</span><br><span class="line">   MOV r0,a</span><br><span class="line">   MOV r1,b</span><br><span class="line">   BL ex_strcpy,&#123;r0,r1&#125;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;original string : %s\n&quot;,a);</span><br><span class="line">printf(&quot;copied string : %s\n&quot;,b);</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="C-C-与汇编程序的相互调用"><a href="#C-C-与汇编程序的相互调用" class="headerlink" title="C/C++与汇编程序的相互调用"></a>C/C++与汇编程序的相互调用</h3><p>在汇编程序中使用EXPORT指示符声明本程序可以被别的程序调用。在C语言程序中使用extern关键词声明该汇编程序可以被调用，C++语言程序使用extern“C”来声明该汇编程序可以被调用。<br>C程序保存为.c文件,汇编程序保存为.s文件<br>C语言如同调用函数一样使用汇编程序，函数参数通过R0,R1,R2,R3进行传递，返回值放在R0,R1里。<br>如：strtest.c</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;                </span><br><span class="line">#include &lt;LPC21xx.H&gt;             </span><br><span class="line"></span><br><span class="line">extern  void  STRCopy(char* d, const char * s);</span><br><span class="line"></span><br><span class="line">int main (void)  &#123;            </span><br><span class="line">  const char * srcstr&#x3D;&quot;first string - source&quot;;</span><br><span class="line">  char * dststr&#x3D;&quot;second string - dest&quot;;</span><br><span class="line">  printf(&quot;before copying...\n&quot;);</span><br><span class="line">  printf(&quot;%s\n%s\n&quot;,srcstr,dststr);</span><br><span class="line">  STRCopy(dststr,srcstr);</span><br><span class="line">  printf(&quot;after copying...\n&quot;);</span><br><span class="line">  printf(&quot;%s\n%s\n&quot;,srcstr,dststr);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>scopy.s</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AREA SCopy,CODE,READONLY</span><br><span class="line">	EXPORT STRCopy</span><br><span class="line">STRCopy</span><br><span class="line">	LDRB R2,[R1],#1</span><br><span class="line">	STRB R2,[R0],#1</span><br><span class="line">	CMP R2,#0</span><br><span class="line">	BNE STRCopy</span><br><span class="line">	MOV R7,#100</span><br><span class="line">	MOV PC,LR</span><br><span class="line">	END</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="汇编调用C"><a href="#汇编调用C" class="headerlink" title="汇编调用C"></a>汇编调用C</h3><p>在汇编程序中使用IMPORT指示符声明将要调用C程序。<br>采用B/BL跳转实现调用。<br>C程序保存为.c文件,汇编程序保存为.s文件<br>通过R0,R1,R2,R3进行函数参数传递，返回值放在R0,R1里。<br>例如：<br>test_func.c</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int g(int a,int b,int c, int d,int e)</span><br><span class="line">&#123;</span><br><span class="line">return  a+b+c+d+e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>main_test.s</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">PRESERVE8</span><br><span class="line">	;EXPORT f</span><br><span class="line">	AREA f,CODE,READONLY</span><br><span class="line">	EXPORT  Reset_Handler</span><br><span class="line">	IMPORT g</span><br><span class="line">Reset_Handler</span><br><span class="line">	STR LR,[SP,#-4]!</span><br><span class="line">	MOV R0,#2</span><br><span class="line">	ADD R1,R0,R0</span><br><span class="line">	ADD R2,R1,R0</span><br><span class="line">	ADD R3,R2,R1</span><br><span class="line">	STR R3,[SP,#-4]!</span><br><span class="line">	ADD R3,R1,R1</span><br><span class="line">	BL g</span><br><span class="line">	ADD SP,SP,#4</span><br><span class="line">	LDR PC,[SP],#4</span><br><span class="line">	END</span><br></pre></td></tr></table></figure>
+<hr>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+   <div>
+  
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfgouzi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/%E7%8B%97.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="gouzi避难所">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/09/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" itemprop="url">嵌入式学习笔记1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-09T16:36:25+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">嵌入式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="ARM处理器的结构"><a href="#ARM处理器的结构" class="headerlink" title="ARM处理器的结构"></a>ARM处理器的结构</h1><p>ARM处理器的基本特征:</p>
+<ul>
+<li>RISC</li>
+<li>双密度指令集(支持Thumb指令)</li>
+<li>流水线结构</li>
+<li>哈佛结构<h2 id="ARM处理器的RSIC特征："><a href="#ARM处理器的RSIC特征：" class="headerlink" title="ARM处理器的RSIC特征："></a>ARM处理器的RSIC特征：</h2>CISC–复杂指令集计算机:<br>为实现复杂操作，微处理器提供机器指令，还通过存于只读存贮器（ROM）中的微程序来实现其极强的功能，微处理器在分析每一条指令之后执行微指令来完成所需的功能，这种设计的形式被称为CISC （Complex Instruction Set Computer，复杂指令集计算机）结构。一般CISC计算机所含的指令数目至少300条以上，有的甚至超过500条。<br>RISC–精简指令集计算机:<br>指令系统应当只包含那些使用频率很高的少量指令，并提供一些必要的指令以支持操作系统和高级语言，按照这个原则发展而成的计算机被称为RISC (Reduced Instruction Set Computer，精简指令集计算机)结构。<br>ARM处理器沿用了RISC技术的基本特征。采用指令流水线，采用更多的通用寄存器，只有Load和Store指令能够访问内存，芯片逻辑不采用微指令技术而采用硬布线技术实现，按照正交指令集格式来设计运算指令和数据传送指令。<h2 id="ARM7流水线"><a href="#ARM7流水线" class="headerlink" title="ARM7流水线"></a>ARM7流水线</h2><ol>
+<li>ARM7TDMI使用流水线以提高处理器指令的流动速度。流水线允许几个操作同时进行，以及处理和存储系统连续操作。</li>
+<li>ARM7TDMI使用3级流水线，因此，指令的执行分3个阶段:取指，译码和执行。</li>
+<li>正常操作执行：在执行当前一条指令的同时，后续的一条指令被译码，后续的第二条指令从存储器中被取出。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="ARM存储器介绍"><a href="#ARM存储器介绍" class="headerlink" title="ARM存储器介绍"></a>ARM存储器介绍</h1><p>ARM处理器总共有37个32位寄存器，其中有31个通用寄存器、6个状态寄存器（到目前位置状态寄存器只定义了12位）。这些寄存器按照工作模式分成不同的组。编程时哪些寄存器组可用，哪些寄存器组不可用是由处理器的状态和模式决定的。<br>其中:</p>
+<h2 id="未分组的通用寄存器"><a href="#未分组的通用寄存器" class="headerlink" title="未分组的通用寄存器"></a>未分组的通用寄存器</h2><p>寄存器R0～R7为未分组的通用寄存器，它们在任何处理器模式都对应于相同的32位物理寄存器。</p>
+<h2 id="第一类分组的通用寄存器"><a href="#第一类分组的通用寄存器" class="headerlink" title="第一类分组的通用寄存器"></a>第一类分组的通用寄存器</h2><p>寄存器R8~R12有两个分组的物理寄存器。一个用于除FIQ模式之外的所有寄存器模式，另一个用于FIQ模式。<br>在发生FIQ中断后，处理器不必为保护寄存器而浪费时间，从而加速了FIQ的处理速度。<br>（FIQ:快速中断请求，在ARM中，FIQ模式是特权模式中的一种同时也属于异常模式一类。用于高速数据传输或通道处理，在触发快速中断请求（FIQ）时进入。）</p>
+<h2 id="第二类分组的通用寄存器"><a href="#第二类分组的通用寄存器" class="headerlink" title="第二类分组的通用寄存器"></a>第二类分组的通用寄存器</h2><p>寄存器R13,R14分别有6个分组的物理寄存器。一个用于用户和系统模式，其余5个分别用于5种异常模式。</p>
+<h2 id="状态寄存器"><a href="#状态寄存器" class="headerlink" title="状态寄存器"></a>状态寄存器</h2><p>存储器CPSR为当前程序状态存储器，在异常模式中，另外一个寄存器”程序状态保存寄存器(SPSR)”可以被访问。每种异常都有自己的SPSR,在进入异常时它保存CPSR的当前值，异常退出时可通过它恢复CPSR。</p>
+<h1 id="哈佛结构"><a href="#哈佛结构" class="headerlink" title="哈佛结构"></a>哈佛结构</h1><p><strong>冯●诺依曼体系结构</strong><br>  只有一个主存储器，主存储器里存放的内容可以是数据，也可以是指令。它只有一种访问主存储器的指令，并且只有在取指令周期从主存储器取出来的二进制数码才是机器指令。CPU通过数据总线与存储器交换信息。<br><strong>哈佛体系结构体系结构</strong><br>  存储器分为两个部分，一部分存放指令，另一部分存放数据，它们各自拥有自己的地址空间和访问指令，可以分别独立访问。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+   <div>
+  
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -706,7 +1076,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -717,7 +1087,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -728,7 +1098,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
