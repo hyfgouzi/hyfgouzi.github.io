@@ -242,6 +242,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfgouzi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/%E7%8B%97.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="gouzi避难所">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/10/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/" itemprop="url">嵌入式学习笔记3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-10T10:59:12+08:00">
+                2020-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">嵌入式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>刚开始写C和ARM混合编程的时候，我的内心是崩溃的，感觉无从下手，在网上搜了很多资料，零零散散的，仍然没有解决我的问题。后来终于写出来了一道很简单的C和ARM混合编程，我更崩溃了。它确实没有什么难度，但它有着学习所有知识的共同点：不知道怎么学。<br>解决问题，首先得知道，问题是什么。很多时候不知道怎么办，糊里糊涂的一顿操作，终于碰巧遇到了对自己有用的，却发现时间已过大半。这很糟糕。遇到问题时，必须清楚自己的问题是什么，将它具体的表达出来，然后逐一解决。</p>
+<hr>
+<p>混合编程：请用ARM汇编与c语言混合编程实现字符串比较功能（c程序调汇编程序），汇编程序负责比较两个字符串，c程序负责赋值两个串及输出比较结果。<br> 这是一道很简单的题目，ARM汇编与c语言混合编程有多种形式,(c程序调用混编)是其中一种，有一些需要注意的地方(会在下面提出)<br> 看到一道题目，首先把自己会的那部分写出：<br> c程序负责复制两个串及输出比较结果：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> #include&lt;stdio.h&gt;</span><br><span class="line">#include &lt;LPC21xx.H&gt; &#x2F;&#x2F;uvision c调ARM汇编配置文件</span><br><span class="line">##############</span><br><span class="line">int main()&#123;</span><br><span class="line">    char *a&#x3D;&quot;azzz&quot;;</span><br><span class="line">    char *b&#x3D;&quot;aczz&quot;;</span><br><span class="line">	PINSEL0 &#x3D; 0x00050000;           &#x2F;* Enable RxD1 and TxD1                     *&#x2F;</span><br><span class="line">    U1LCR &#x3D; 0x83;                   &#x2F;* 8 bits, no Parity, 1 Stop bit            *&#x2F;</span><br><span class="line">    U1DLL &#x3D; 97;                     &#x2F;* 9600 Baud Rate @ 15MHz VPB Clock         *&#x2F;</span><br><span class="line">    U1LCR &#x3D; 0x03;</span><br><span class="line">    #######</span><br><span class="line">	#######</span><br><span class="line">    printf(&quot;字符串相等\n&quot;);</span><br><span class="line">    #######</span><br><span class="line">    printf(&quot;字符串不相等\n&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>如上只是个简单的C语言的赋值和输出代码，7-10行代码为串口输出代码，即在串口2中输出（字符串相等或者不相等)，########是需要写代码的部分。<br>既然是调用ARM汇编，很好理解，就是ARM汇编里有着比较的方法，C语言调用了这个方法。即跟C语言里调用函数一样，只不过这个函数是在外部文件里。<br>在汇编程序中使用EXPORT指示符声明本程序可以被别的程序调用。在C语言程序中使用extern关键词声明该汇编程序可以被调用。<br>extern int SCompare(char *a,char *b);<br>这条语句指明了在C语言中可以调用汇编中的SCompare。<br>函数离不开参数和返回值，那么传参是一个问题，在参数传递的时候我曾纠结了好久，但大可不必，C的函数参数会自动存在R0,R1,R2,R3中，如果参数多于4个，多余参数存放在堆栈当中。<br>很好理解，就把它当做函数里的形参，实参。<br>传递到汇编中，(想想在C里你会怎么做?),定义两个变量接受参数的值。<br><code>LDRB R3,[R1],#1</code><br><code>LDRB R4,[R0],#1</code><br>这两条代码，就把r0,r1中的字符串依次传递给了r3,r4。<br>数据传递后，进行比较<br><code>CMP R3,R4</code><br>比较的结果有两种，一样或者不一样，因此，需要对两个结果分别作出限制。<br>（想想在C里你会怎么做?)<br>if…else…如果一样，那么XXXX，否则<br>在汇编中，没有if..else…语句，但是可以用条件限制指令，比较完后可以利用B/BNE等 进行跳转，（嵌入式学习笔记2中有)。<br>因此，在CMP语句下面接上一个BNE语句，如果不相等，就跳转。如果相等，继续比较。<br>CMP和BNE连用，完美的解决了问题。<br>比较完后，(想想在C里你会怎么做)，如果一样，会赋一个值，如果不一样，会赋一个值。通过MOV即可完成。但这里有一个坑，我想你必须知道，C向ARM传递参数的时候，将参数存到R0,R1,R2,R3中，但返回参数是存在R0中，你如果写成了R3，那肯定是不会对的。<br><code>MOV PC,LR</code><br>这很重要，有了它，就可将值返回给C代码。<br>既然有了返回值，那么在C里需要接受它<br><code>int flag</code><br><code>flag=SCompare(a,b)</code><br>flag中就存储了代表一样或者不一样的值。<br>在C中，利用if…else…即可完成实现。<br>完整代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">#include &lt;LPC21xx.H&gt;</span><br><span class="line">extern int  SCompare(char *a,char *b);</span><br><span class="line">int main()&#123;</span><br><span class="line">    char *a&#x3D;&quot;azzz&quot;;</span><br><span class="line">    char *b&#x3D;&quot;aczz&quot;;</span><br><span class="line">	int flag;</span><br><span class="line">	PINSEL0 &#x3D; 0x00050000;           &#x2F;* Enable RxD1 and TxD1                     *&#x2F;</span><br><span class="line">    U1LCR &#x3D; 0x83;                   &#x2F;* 8 bits, no Parity, 1 Stop bit            *&#x2F;</span><br><span class="line">    U1DLL &#x3D; 97;                     &#x2F;* 9600 Baud Rate @ 15MHz VPB Clock         *&#x2F;</span><br><span class="line">    U1LCR &#x3D; 0x03;</span><br><span class="line">    flag&#x3D;SCompare(a,b);</span><br><span class="line">	if(flag)</span><br><span class="line">    printf(&quot;字符串相等\n&quot;);</span><br><span class="line">	else</span><br><span class="line">    printf(&quot;字符串不相等\n&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">AREA SCompare,CODE,READONLY</span><br><span class="line">	EXPORT SCompare</span><br><span class="line">STR</span><br><span class="line">	LDRB R3,[R1],#1</span><br><span class="line">	LDRB R4,[R0],#1</span><br><span class="line">	CMP R3,R4</span><br><span class="line">	BNE NO</span><br><span class="line">	CMP R3,#0</span><br><span class="line">	BNE STR</span><br><span class="line">YES</span><br><span class="line">    MOV R0,#1</span><br><span class="line">    B ENDCMP</span><br><span class="line">NO</span><br><span class="line">    MOV R0,#0</span><br><span class="line">ENDCMP</span><br><span class="line">    MOV PC,LR</span><br><span class="line"> END</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+   <div>
+  
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1076,7 +1230,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
